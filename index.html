@@ -3044,6 +3044,7 @@ let openInParser = null;
   function reset() { res = null; shown = 0; render(); }
   function render() {
     if (!res) {
+      $("pr-step").disabled = false; $("pr-all").disabled = false;
       $("pr-trace").innerHTML = '<p class="hint">Naciśnij „Następny krok”, aby rozpocząć rozbiór.</p>';
       $("pr-stats").innerHTML = ""; $("pr-tree").innerHTML = '<p class="hint">Drzewo pojawi się po zakończeniu rozbioru.</p>';
       $("pr-msg").innerHTML = ""; return;
