@@ -4,9 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Laboratorium gramatyk</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
+<meta name="description" content="Interaktywne ćwiczenia do wykładów 8–11 z Języków programowania: gramatyki, pierw i nast, LL(1), EBNF, diagramy składni, translator RBNF i kompilator PL/0 Wirtha.">
 <style>body{margin:0}img{max-width:100%}</style>
 <style>
 /* Układ: nagłówek z nazwą i kartami, pod nim jedna aktywna pracownia — wejście po lewej, wynik po prawej, wąsko jedna kolumna */
@@ -25,8 +23,9 @@
   --err-soft: #fbe8e5;
   --warn: #8a6100;
   --warn-soft: #fbf1d9;
-  --font-ui: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
-  --font-code: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Consolas, monospace;
+  /* Fonty systemowe — bez pobierania z zewnętrznych serwerów (IBM Plex zostaje, jeśli jest zainstalowany lokalnie) */
+  --font-ui: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", "Helvetica Neue", Arial, sans-serif;
+  --font-code: "IBM Plex Mono", ui-monospace, "SF Mono", "SFMono-Regular", Menlo, Consolas, "Cascadia Mono", "DejaVu Sans Mono", "Liberation Mono", monospace;
   --radius: 6px;
 }
 @media (prefers-color-scheme: dark) {
@@ -67,7 +66,10 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .tabs button[aria-selected="true"] { color: var(--accent); border-bottom-color: var(--accent); }
 .tabs button:hover { color: var(--fg); }
 
-main { padding-block: 22px 60px; }
+main { padding-block: 22px 40px; }
+.foot { border-top: 1px solid var(--line); background: var(--surface); color: var(--muted); font-size: 0.85rem; padding-block: 14px 22px; }
+.foot p { margin: 4px 0; max-width: 100ch; }
+.foot a { color: var(--accent); }
 .panel { display: grid; gap: 18px; }
 .lead { display: flex; flex-wrap: wrap; gap: 4px 18px; align-items: baseline; }
 .lead h2 { font-size: 1.3rem; }
@@ -241,7 +243,7 @@ input[type="range"] { width: 100%; accent-color: var(--accent); }
   .tabs button, .btn, .chip { transition: color .15s, border-color .15s, background .15s; }
 }
 
-/* Wykład 2 */
+/* Wykład 9 */
 .rr figcaption .fs { font-weight: 400; color: var(--muted); font-size: 0.8rem; margin-left: 8px; }
 .rr svg g.conflict rect { stroke: var(--err); stroke-width: 2; }
 .rr svg g.conflict path, .rr svg g.conflict line { stroke: var(--err); }
@@ -296,7 +298,7 @@ input[type="range"] { width: 100%; accent-color: var(--accent); }
 .harr { color: var(--muted); }
 #tr-out { min-height: 60px; }
 
-/* Wykład 4: PL/0 */
+/* Wykład 11: PL/0 */
 .cols-even { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
 @media (max-width: 960px) { .cols-even { grid-template-columns: minmax(0, 1fr); } }
 .listing4 { max-height: 520px; overflow: auto; font-size: 0.8rem; line-height: 1.45; }
@@ -372,7 +374,7 @@ table.data tr.cur td { background: var(--warn-soft); }
   <div class="wrap">
     <div class="brand">
       <h1>Laboratorium gramatyk</h1>
-      <p>Języki programowania · wykłady 1–4 · gramatyki, diagramy składni, analizatory, translator RBNF i kompilator PL/0</p>
+      <p>Języki programowania · wykłady 8–11 · gramatyki, diagramy składni, analizatory, translator RBNF i kompilator PL/0</p>
     </div>
     <nav class="tabs" role="tablist" aria-label="Pracownie">
       <button role="tab" id="tab-drzewa" data-tab="drzewa"><span class="n">1</span>Od tekstu do drzewa</button>
@@ -399,7 +401,7 @@ table.data tr.cur td { background: var(--warn-soft); }
 <section class="panel" id="p-drzewa" role="tabpanel" aria-labelledby="tab-drzewa">
   <div class="lead">
     <h2>Od tekstu do drzewa</h2>
-    <span class="ref">wykład 1, części 1–3</span>
+    <span class="ref">wykład 8, części 1–3</span>
     <p>Wpisz wyrażenie i obserwuj, co z nim robią kolejne etapy kompilatora. Spróbuj też wyrażeń błędnych — zobaczysz, który etap wykrywa który błąd.</p>
   </div>
   <div class="cols">
@@ -435,7 +437,7 @@ table.data tr.cur td { background: var(--warn-soft); }
 <section class="panel" id="p-wyprowadzanie" role="tabpanel" aria-labelledby="tab-wyprowadzanie" hidden>
   <div class="lead">
     <h2>Wyprowadzanie zdań</h2>
-    <span class="ref">wykład 1, część 4</span>
+    <span class="ref">wykład 8, część 4</span>
     <p>Kliknij symbol pomocniczy w formie zdaniowej, a potem produkcję, którą chcesz zastosować. Gdy zostaną same symbole końcowe, otrzymasz zdanie języka.</p>
   </div>
   <div class="cols">
@@ -479,7 +481,7 @@ table.data tr.cur td { background: var(--warn-soft); }
 <section class="panel" id="p-zbiory" role="tabpanel" aria-labelledby="tab-zbiory" hidden>
   <div class="lead">
     <h2>pierw, nast i reguły LL(1)</h2>
-    <span class="ref">wykład 1, część 5</span>
+    <span class="ref">wykład 8, część 5</span>
     <p>Zbiory liczy się iteracyjnie: każda produkcja może dopisać symbole do któregoś zbioru, aż do chwili, gdy nic się już nie zmienia (punkt stały). Przesuwaj suwak, żeby zobaczyć kolejne kroki.</p>
   </div>
   <div class="cols">
@@ -509,7 +511,7 @@ table.data tr.cur td { background: var(--warn-soft); }
 <section class="panel" id="p-rozbior" role="tabpanel" aria-labelledby="tab-rozbior" hidden>
   <div class="lead">
     <h2>Rozbiór zstępujący</h2>
-    <span class="ref">wykład 1, część 5</span>
+    <span class="ref">wykład 8, część 5</span>
     <p>Lewa kolumna to cele (stos), prawa — nieprzeczytane wejście. W trybie LL(1) każda decyzja zależy od jednego symbolu wejścia (podkreślonego). W trybie z powrotami parser próbuje kolejnych produkcji i cofa się po porażce.</p>
   </div>
   <div class="cols">
@@ -553,7 +555,7 @@ table.data tr.cur td { background: var(--warn-soft); }
 <section class="panel" id="p-ebnf" role="tabpanel" aria-labelledby="tab-ebnf" hidden>
   <div class="lead">
     <h2>EBNF i diagramy składni</h2>
-    <span class="ref">wykład 1, część 6 · wykład 2, reguły A1–A6</span>
+    <span class="ref">wykład 8, część 6 · wykład 9, reguły A1–A6</span>
     <p>Reguły w notacji ISO/IEC 14977 zamieniają się w diagramy składni: <code>[ … ]</code> to objazd, <code>{ … }</code> to pętla przechodzona od prawej do lewej. Przy każdej regule widać zbiory pierw i nast, a rozgałęzienia łamiące reguły 1–2 są zaznaczone na czerwono.</p>
   </div>
   <div class="cols">
@@ -563,6 +565,14 @@ table.data tr.cur td { background: var(--warn-soft); }
         <div>
           <label class="lbl" for="eb-in">Gramatyka EBNF</label>
           <textarea wrap="off" id="eb-in" spellcheck="false" rows="12"></textarea>
+        </div>
+        <div>
+          <span class="lbl">Analiza LL(1)</span>
+          <div class="seg" id="eb-level">
+            <button data-level="znaki" aria-pressed="true" type="button">znak po znaku</button>
+            <button data-level="symbole" aria-pressed="false" type="button">symbole leksykalne</button>
+          </div>
+          <p class="hint" style="margin-top:6px" id="eb-level-hint"></p>
         </div>
         <div id="eb-err"></div>
       </div>
@@ -592,7 +602,7 @@ table.data tr.cur td { background: var(--warn-soft); }
 <section class="panel" id="p-program" role="tabpanel" aria-labelledby="tab-program" hidden>
   <div class="lead">
     <h2>Od diagramu do programu</h2>
-    <span class="ref">wykład 2, reguły B1–B7</span>
+    <span class="ref">wykład 9, reguły B1–B7</span>
     <p>Każdy diagram staje się procedurą: owal — sprawdzeniem symbolu i <code>pobsym</code>, prostokąt — wywołaniem, rozgałęzienie — instrukcją <code>if</code>, pętla — <code>while</code>. Kliknij element diagramu albo wiersz programu, żeby zobaczyć, co sobie odpowiada.</p>
   </div>
   <div class="cols">
@@ -638,7 +648,7 @@ table.data tr.cur td { background: var(--warn-soft); }
 <section class="panel" id="p-sterowany" role="tabpanel" aria-labelledby="tab-sterowany" hidden>
   <div class="lead">
     <h2>Analizator sterowany składnią</h2>
-    <span class="ref">wykład 2, reguły C1–C7 i procedura analizuj</span>
+    <span class="ref">wykład 9, reguły C1–C7 i procedura analizuj</span>
     <p>Gramatyka staje się strukturą danych: każdy symbol to węzeł z polami <code>człalt</code> (lewa komórka — następna alternatywa) i <code>nast</code> (prawa — następny element). Procedura <code>analizuj</code> jest jedna dla każdej gramatyki: chodzi po węzłach i wybiera <code>nast</code>, gdy węzeł pasuje, albo <code>człalt</code>, gdy nie.</p>
   </div>
   <div class="cols">
@@ -683,7 +693,7 @@ table.data tr.cur td { background: var(--warn-soft); }
 <section class="panel" id="p-translator" role="tabpanel" aria-labelledby="tab-translator" hidden>
   <div class="lead">
     <h2>Translator RBNF</h2>
-    <span class="ref">wykład 3</span>
+    <span class="ref">wykład 10</span>
     <p>Program Wirtha czyta produkcje w RBNF i buduje z nich strukturę węzłów. Krok po kroku widać wywołania <code>czynnik</code>, <code>składnik</code> i <code>wyrażenie</code>, wartości wskaźników <code>p</code>, <code>q</code>, <code>r</code> oraz listę symboli z wartownikiem. Dane mają trzy części: produkcje zakończone <code>$</code>, symbol początkowy i zdania zakończone kropką.</p>
   </div>
   <div class="cols">
@@ -720,7 +730,7 @@ table.data tr.cur td { background: var(--warn-soft); }
           <button data-dir="e2r" aria-pressed="true" type="button">ISO EBNF → RBNF</button>
           <button data-dir="r2e" aria-pressed="false" type="button">RBNF → ISO EBNF</button>
         </div>
-        <textarea wrap="off" id="cv-in" spellcheck="false" rows="4" style="min-height:90px"></textarea>
+        <textarea wrap="off" id="cv-in" spellcheck="false" rows="4" style="min-height:90px" aria-label="Gramatyka do przekształcenia"></textarea>
         <pre class="codeblock" id="cv-out"></pre>
         <div id="cv-msg"></div>
         <div class="row"><button class="btn" id="cv-use" type="button">Wstaw do translatora</button></div>
@@ -733,7 +743,7 @@ table.data tr.cur td { background: var(--warn-soft); }
 <section class="panel" id="p-lacznosc" role="tabpanel" aria-labelledby="tab-lacznosc" hidden>
   <div class="lead">
     <h2>Struktura a znaczenie: łączność</h2>
-    <span class="ref">wykład 1, część 7</span>
+    <span class="ref">wykład 8, część 7</span>
     <p>Trzy opisy tego samego języka różnic, np. <code>10 - 5 - 2</code>. Zbiór zdań jest ten sam, ale struktura — a więc i wynik — już nie.</p>
   </div>
   <div class="card stack">
@@ -775,7 +785,7 @@ table.data tr.cur td { background: var(--warn-soft); }
 <section class="panel" id="p-pl0" role="tabpanel" aria-labelledby="tab-pl0" hidden>
   <div class="lead">
     <h2>Kompilator PL/0</h2>
-    <span class="ref">wykład 4</span>
+    <span class="ref">wykład 11</span>
     <p>Pełny kompilator Wirtha przeniesiony do przeglądarki. Daje ten sam wydruk co program w Pascalu: źródło z bieżącym adresem kodu i znaczniki <code>^n</code> w miejscach błędów. Gdy błędów nie ma, program jest wykonywany. Ten sam program oglądasz w zakładkach 11 i 12.</p>
   </div>
   <div class="cols">
@@ -810,7 +820,7 @@ table.data tr.cur td { background: var(--warn-soft); }
 <section class="panel" id="p-kodgen" role="tabpanel" aria-labelledby="tab-kodgen" hidden>
   <div class="lead">
     <h2>Generowanie kodu</h2>
-    <span class="ref">wykład 4</span>
+    <span class="ref">wykład 11</span>
     <p>Kliknij symbol w programie, aby zobaczyć wygenerowane dla niego rozkazy, albo kliknij rozkaz, aby zobaczyć jego źródło. Suwak odtwarza kompilację: rozkaz po rozkazie, razem z uzupełnianiem adresów skoków w przód.</p>
   </div>
   <div class="cols cols-even">
@@ -818,9 +828,9 @@ table.data tr.cur td { background: var(--warn-soft); }
       <div class="card stack">
         <div class="row" id="kg-presets"></div>
         <div class="row">
-          <button class="btn" id="kg-prev" type="button">◀</button>
+          <button class="btn" id="kg-prev" type="button" aria-label="Poprzedni krok kompilacji" title="Poprzedni krok">◀</button>
           <input type="range" id="kg-slider" min="0" max="0" value="0" aria-label="krok kompilacji" style="flex:1;width:auto">
-          <button class="btn" id="kg-next" type="button">▶</button>
+          <button class="btn" id="kg-next" type="button" aria-label="Następny krok kompilacji" title="Następny krok">▶</button>
           <button class="btn" id="kg-full" type="button">Cały kod</button>
         </div>
         <div class="steptext" id="kg-text"></div>
@@ -844,7 +854,7 @@ table.data tr.cur td { background: var(--warn-soft); }
 <section class="panel" id="p-maszyna" role="tabpanel" aria-labelledby="tab-maszyna" hidden>
   <div class="lead">
     <h2>Maszyna PL/0</h2>
-    <span class="ref">wykład 4</span>
+    <span class="ref">wykład 11</span>
     <p>Interpreter wykonuje kod z zakładki 10 rozkaz po rozkazie. Każde wywołanie procedury tworzy na stosie segment: ŁS (łącze statyczne), ŁD (łącze dynamiczne), AP (adres powrotu) i zmienne lokalne. Po wykonaniu <code>ŁAD</code> albo <code>PAM</code> z poziomem większym od zera podświetla się droga funkcji <code>baza(l)</code> po łańcuchu statycznym.</p>
   </div>
   <div class="cols cols-even">
@@ -878,7 +888,7 @@ table.data tr.cur td { background: var(--warn-soft); }
 <section class="panel" id="p-bledy" role="tabpanel" aria-labelledby="tab-bledy" hidden>
   <div class="lead">
     <h2>Reagowanie na błędy</h2>
-    <span class="ref">wykład 4</span>
+    <span class="ref">wykład 11</span>
     <p>Po błędzie analizator nie przerywa pracy. Procedura <code>test(s1, s2, n)</code> pomija symbole, aż trafi na symbol z <code>s1 + s2</code>. Poniżej widać każdy błąd: w której procedurze wystąpił, jakie zbiory przekazano do <code>test</code> i które symbole zostały pominięte (przekreślone w programie).</p>
   </div>
   <div class="cols">
@@ -906,7 +916,7 @@ table.data tr.cur td { background: var(--warn-soft); }
 <section class="panel" id="p-quiz" role="tabpanel" aria-labelledby="tab-quiz" hidden>
   <div class="lead">
     <h2>Sprawdź się</h2>
-    <span class="ref">wykłady 1–4</span>
+    <span class="ref">wykłady 8–11</span>
     <p>Kliknij odpowiedź — od razu zobaczysz, czy jest poprawna, i krótkie wyjaśnienie.</p>
   </div>
   <div class="card row" style="justify-content:space-between">
@@ -917,6 +927,18 @@ table.data tr.cur td { background: var(--warn-soft); }
 </section>
 
 </main>
+<footer class="foot">
+  <div class="wrap">
+    <p><b>Języki programowania</b> · Uniwersytet SWPS · semestr zimowy 2026/27 · ćwiczenia do wykładów 8–11. Materiały: dr inż. Paweł Róg.</p>
+    <p>Kompilator PL/0 i translator RBNF to przekłady programów N. Wirtha z książki <i>Algorytmy + struktury danych = programy</i> (WNT, rozdz. 5).</p>
+    <p>Do poczytania:
+      <a href="https://www.cl.cam.ac.uk/~mgk25/iso-14977.pdf">norma ISO/IEC 14977 (EBNF, PDF)</a> ·
+      <a href="https://people.inf.ethz.ch/wirth/CompilerConstruction/index.html">N. Wirth, <i>Compiler Construction</i></a> ·
+      <a href="https://craftinginterpreters.com/">R. Nystrom, <i>Crafting Interpreters</i></a> ·
+      <a href="https://github.com/p4welrog/jpi">kod źródłowy tej strony</a></p>
+    <p>Wybrana zakładka, programy PL/0 i odpowiedzi w quizie zapisują się tylko w tej przeglądarce (localStorage). Wersja z 27.11.2026.</p>
+  </div>
+</footer>
 <script>
 // ===== Silnik gramatyk: BNF, ε / pierw / nast, LL(1), rozbiór, EBNF =====
 "use strict";
@@ -1325,6 +1347,13 @@ function specialKind(text) {
   return null;
 }
 
+// „A–Z, a–z” → [["A","Z"], ["a","z"]]; null, gdy tekst nie jest listą zakresów pojedynczych znaków
+function specialRanges(text) {
+  const parts = text.trim().split(/\s*,\s*/);
+  const r = parts.map(p => p.match(/^(\S)\s*[–-]\s*(\S)$/));
+  return r.length && r.every(Boolean) ? r.map(m => [m[1], m[2]]) : null;
+}
+
 function makeMatcher(rules, src) {
   const byName = new Map(rules.map(r => [r.name, r.body]));
   const memo = new Map(), busy = new Set();
@@ -1352,6 +1381,13 @@ function makeMatcher(rules, src) {
         }
         if (kind === "space") { if (src[pos] === " ") return new Set([pos + 1]); note(pos, "spacja"); return new Set(); }
         if (kind === "any") { if (pos < src.length && src[pos] !== "\n") return new Set([pos + 1]); note(pos, "dowolny znak"); return new Set(); }
+        // Zakresy znaków, np. ? A–Z, a–z ? albo ? 0-9 ?
+        const ranges = specialRanges(node.text);
+        if (ranges) {
+          const c = src[pos];
+          if (c !== undefined && ranges.some(([a, b]) => c >= a && c <= b)) return new Set([pos + 1]);
+          note(pos, node.text.trim()); return new Set();
+        }
         unknown.add(node.text); return new Set();
       }
       case "nt": {
@@ -1475,7 +1511,7 @@ function evalAst(n) {
 function postfix(n) { return n.children.length ? [...postfix(n.children[0]), ...postfix(n.children[1]), n.label] : [n.label]; }
 
 if (typeof module !== "undefined") module.exports = { parseBNF, analyze, parseLL1, parseBacktrack, tokenizeInput, parseEBNF, makeMatcher, lexExpr, parseExpr, evalAst, postfix, prodStr, ebnfToString };
-// ===== Silnik do wykładu 2: analiza EBNF, reguły B (program), reguły C (struktura danych) =====
+// ===== Silnik do wykładu 9: analiza EBNF, reguły B (program), reguły C (struktura danych) =====
 
 function walkEBNF(n, f) {
   f(n);
@@ -1850,7 +1886,7 @@ function runIR(irs, start, tokens, limit = 1500) {
     exec(irs.get(start));
     stack.pop();
     if (sym() === "$") { step(null, "Koniec wejścia — zdanie poprawne.", "ok"); ok = true; }
-    else step(null, `Analiza zakończona, ale zostało wejście „${tokens.slice(pos).join(" ")}”. błąd.`, "err");
+    else step(null, `Analiza zakończona, ale zostało wejście „${tokens.slice(pos).join(" ")}” — błąd.`, "err");
   } catch (e) { if (e !== STOP) throw e; }
   return { steps, ok };
 }
@@ -1945,7 +1981,7 @@ function runAnalizuj(S, start, tokens, limit = 1500) {
 }
 
 if (typeof module !== "undefined") module.exports = { reduceRules, analyzeEBNF, genIR, printPascal, printKotlin, tokenizeByTerminals, runIR, buildStructure, runAnalizuj, walkEBNF };
-// ===== Silnik do wykładu 3: translator RBNF Wirtha z zapisem kroków, konwerter notacji =====
+// ===== Silnik do wykładu 10: translator RBNF Wirtha z zapisem kroków, konwerter notacji =====
 
 function runTranslator(srcRaw, limit = 4000) {
   const src = srcRaw.replace(/\r/g, "").replace(/\s+$/, "") + "\n";
@@ -1986,7 +2022,7 @@ function runTranslator(srcRaw, limit = 4000) {
   }
   function readln() { while (i < src.length && src[i] !== "\n") i++; if (i < src.length) i++; }
   const eof = () => i >= src.length;
-  function blad(why) { writeln(); writeln("NIEPOPRAWNY INPUT"); step(`błąd: ${why}`, "err"); throw STOP; }
+  function blad(why) { writeln(); writeln("NIEPOPRAWNE DANE"); step(`błąd: ${why}`, "err"); throw STOP; }
   const symbol = c => c !== EOF && !"=,[].$ ".includes(c);
   const isNT = c => c >= "A" && c <= "H";
   const symName = c => c === EOF ? "koniec danych" : `„${c}”`;
@@ -2226,7 +2262,7 @@ function rbnfToEBNFText(rules) {
 }
 
 if (typeof module !== "undefined") module.exports = { runTranslator, parseRBNF, ebnfToRBNF, rbnfToEBNFText };
-// ===== Silnik do wykładu 4: kompilator i maszyna PL/0 (port programu Wirtha) =====
+// ===== Silnik do wykładu 11: kompilator i maszyna PL/0 (port programu Wirtha) =====
 
 const PL0 = (function () {
   const AL = 10, NMAX = 14, AMAX = 2047, LEVMAX = 3, LRMAX = 200, STOS = 500;
@@ -2735,7 +2771,11 @@ function renderTree(root, opts = {}) {
     out.push(s + "</g>");
     (n.children || []).forEach(nodes);
   })(root);
-  return `<div class="tree-wrap"><svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(opts.label || "drzewo")}">${out.join("")}</svg></div>`;
+  // Opis dla czytników ekranu: drzewo w zapisie nawiasowym, np. „W(S(C(2)) + …)”
+  const lin = n => (n.children || []).length ? `${n.label}(${n.children.map(lin).join(" ")})` : String(n.label);
+  let desc = lin(root);
+  if (desc.length > 600) desc = desc.slice(0, 600) + "…";
+  return `<div class="tree-wrap"><svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc((opts.label || "drzewo") + ": " + desc)}">${out.join("")}</svg></div>`;
 }
 
 function caretHTML(src, pos) {
@@ -2757,15 +2797,21 @@ function showTab(id) {
   store.set("lab-tab", id);
 }
 document.querySelectorAll(".tabs button").forEach(b => {
+  b.setAttribute("aria-controls", "p-" + b.dataset.tab);
+  $("p-" + b.dataset.tab).tabIndex = 0;
   b.addEventListener("click", () => showTab(b.dataset.tab));
   b.addEventListener("keydown", e => {
     const i = TABS.indexOf(b.dataset.tab);
-    if (e.key === "ArrowRight" || e.key === "ArrowLeft") {
-      const n = TABS[(i + (e.key === "ArrowRight" ? 1 : TABS.length - 1)) % TABS.length];
-      showTab(n); $("tab-" + n).focus();
-    }
+    let n = null;
+    if (e.key === "ArrowRight" || e.key === "ArrowLeft") n = TABS[(i + (e.key === "ArrowRight" ? 1 : TABS.length - 1)) % TABS.length];
+    else if (e.key === "Home") n = TABS[0];
+    else if (e.key === "End") n = TABS[TABS.length - 1];
+    if (n) { e.preventDefault(); showTab(n); $("tab-" + n).focus(); $("tab-" + n).scrollIntoView({ block: "nearest", inline: "nearest" }); }
   });
 });
+// Komunikaty o wyniku czytane przez czytniki ekranu po każdej zmianie
+["ex-value", "dv-status", "fs-verdict", "pr-msg", "eb-err", "eb-ll1", "eb-result", "bp-msg", "bp-run", "cs-run", "cs-msg", "tr-now",
+ "cv-msg", "as-msg", "pl-status", "kg-text", "ms-text", "qz-score"].forEach(id => { const el = $(id); if (el) el.setAttribute("aria-live", "polite"); });
 
 function presetRow(elId, items, onPick) {
   const box = $(elId);
@@ -2776,6 +2822,13 @@ function presetRow(elId, items, onPick) {
   }));
   return box;
 }
+// Odmiana rzeczownika po liczebniku: odmien(n, "rozkaz", "rozkazy", "rozkazów") → „1 rozkaz”, „3 rozkazy”, „12 rozkazów”, „22 rozkazy”
+function odmien(n, f1, f2, f5) {
+  const j = n % 10, d = n % 100;
+  const f = n === 1 ? f1 : (j >= 2 && j <= 4 && !(d >= 12 && d <= 14)) ? f2 : f5;
+  return `${n} ${f}`;
+}
+function odmienHTML(n, f1, f2, f5) { return odmien(n, f1, f2, f5).replace(/^(\d+)/, "<b>$1</b>"); }
 function debounce(fn, ms = 250) { let t; return (...a) => { clearTimeout(t); t = setTimeout(() => fn(...a), ms); }; }
 
 // ===================== 1. Od tekstu do drzewa =====================
@@ -2807,7 +2860,7 @@ function debounce(fn, ms = 250) { let t; return (...a) => { clearTimeout(t); t =
     }
     off("st-lex", false);
     $("ex-tokens").innerHTML = toks.length
-      ? `<div class="tokens">${toks.map(t => `<span class="tok ${t.type}"><b>${esc(t.text)}</b><span>${t.type}</span></span>`).join("")}</div><p class="hint" style="margin-top:8px">${toks.length} tokenów. Odstępy lekser pomija.</p>`
+      ? `<div class="tokens">${toks.map(t => `<span class="tok ${t.type}"><b>${esc(t.text)}</b><span>${t.type}</span></span>`).join("")}</div><p class="hint" style="margin-top:8px">${odmien(toks.length, "token", "tokeny", "tokenów")}. Odstępy lekser pomija.</p>`
       : '<p class="hint">Brak tokenów — wpisz wyrażenie.</p>';
     let r;
     try { r = parseExpr(toks, src.length); }
@@ -2832,7 +2885,7 @@ function debounce(fn, ms = 250) { let t; return (...a) => { clearTimeout(t); t =
     }
     off("st-val", false);
     $("ex-value").innerHTML = `<div class="result">${esc(fmtNum(val))}</div>
-      <p class="hint" style="margin-top:10px">Zapis przyrostkowy (kolejność rozkazów maszyny stosowej z wykładu 4):</p>
+      <p class="hint" style="margin-top:10px">Zapis przyrostkowy (kolejność rozkazów maszyny stosowej z wykładu 11):</p>
       <div class="caret">${esc(postfix(r.ast).join(" "))}</div>`;
   }
   $("ex-in").addEventListener("input", debounce(update, 150));
@@ -2902,7 +2955,7 @@ function debounce(fn, ms = 250) { let t; return (...a) => { clearTimeout(t); t =
     let st = "";
     if (firstNT < 0) {
       const sentence = form.map(e => e.sym).join(sep);
-      st = msg("ok", `<b>Zdanie języka:</b> <span class="t">${esc(sentence || "ε")}</span> ∈ L(G). Wyprowadzenie ma ${actions.length} kroków.`);
+      st = msg("ok", `<b>Zdanie języka:</b> <span class="t">${esc(sentence || "ε")}</span> ∈ L(G). Wyprowadzenie ma ${odmien(actions.length, "krok", "kroki", "kroków")}.`);
       if (target) st += norm(sentence) === norm(target)
         ? msg("ok", "<b>Zadanie wykonane.</b> To jest zadane zdanie.")
         : msg("warn", `Otrzymane zdanie różni się od zadanego (<span class="t">${esc(target)}</span>). Cofnij kilka kroków.`);
@@ -3062,9 +3115,9 @@ let openInParser = null;
     const done = shown >= res.rows.length;
     $("pr-step").disabled = done; $("pr-all").disabled = done;
     if (done) {
-      let m = res.ok ? msg("ok", `<b>Zdanie należy do języka.</b> Rozbiór zakończony w ${res.rows.length} krokach.`) : msg("err", "<b>Rozbiór nie powiódł się.</b> " + esc(res.rows[res.rows.length - 1].action));
+      let m = res.ok ? msg("ok", `<b>Zdanie należy do języka.</b> Rozbiór zakończony w ${odmien(res.rows.length, "kroku", "krokach", "krokach")}.`) : msg("err", "<b>Rozbiór nie powiódł się.</b> " + esc(res.rows[res.rows.length - 1].action));
       if (mode === "ll1" && res.conflicts) m += msg("warn", "Wystąpił konflikt: gramatyka nie spełnia reguł LL(1), więc decyzja na podstawie jednego symbolu bywa błędna. Spróbuj trybu z powrotami albo sprawdź gramatykę w zakładce 3.");
-      if (mode === "bt" && res.ok) m += msg("info", `Parser z powrotami cofał się <b>${res.backtracks}</b> razy. Rozbiór LL(1) nigdy się nie cofa.`);
+      if (mode === "bt" && res.ok) m += msg("info", `Parser z powrotami cofał się ${odmienHTML(res.backtracks, "raz", "razy", "razy")}. Rozbiór LL(1) nigdy się nie cofa.`);
       $("pr-msg").innerHTML = m;
       $("pr-tree").innerHTML = res.ok || mode === "ll1"
         ? renderTree(res.tree, { label: "drzewo wyprowadzenia", levelH: 48 }) + (res.ok ? "" : '<p class="hint" style="margin-top:6px">Drzewo w chwili błędu.</p>')
@@ -3185,7 +3238,8 @@ const RR = (function () {
     el.draw(M + S, y, o);
     const xe = M + S + el.w;
     o.push(`<path d="M${xe},${y} H${xe + S - 4}"/>${arrow(xe + S - 4, y, 1)}<path d="M${xe + S - 4},${y - 8} V${y + 8} M${xe + S},${y - 8} V${y + 8}"/>`);
-    return `<svg width="${W}" height="${Hh}" viewBox="0 0 ${W} ${Hh}">${o.join("")}</svg>`;
+    const label = `diagram składni${opts.name ? " " + opts.name : ""}: ${ebnfToString(body) || "ciąg pusty"}`;
+    return `<svg width="${W}" height="${Hh}" viewBox="0 0 ${W} ${Hh}" role="img" aria-label="${esc(label)}">${o.join("")}</svg>`;
   }
   return { diagram };
 })();
@@ -3220,9 +3274,46 @@ czynnik   = liczba | "(" , wyrażenie , ")" ;
 liczba    = cyfra , { cyfra } ;
 cyfra     = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" ;`,
       tests: [{ name: "2*(3+4)", s: "2*(3+4)" }, { name: "10-4-3", s: "10-4-3" }, { name: "2*(3+4", s: "2*(3+4" }, { name: "2 + 3", s: "2 + 3" }] },
+    // Gramatyka języka projektu JP — przepisana ze SPECYFIKACJA.md, p. 2
+    { name: "język JP (projekt)", start: "program", level: "symbole", text: `program     = { declaration } ;
+declaration = function | statement ;
+function    = "fun" , ident , "(" , [ params ] , ")" , block ;
+params      = ident , { "," , ident } ;
+block       = "{" , { statement } , "}" ;
+statement   = var_decl | ident_stmt | if_stmt | while_stmt | print_stmt | return_stmt | block ;
+var_decl    = "var" , ident , "=" , expression , ";" ;
+ident_stmt  = ident , ( "=" , expression | "(" , [ args ] , ")" ) , ";" ;
+if_stmt     = "if" , "(" , condition , ")" , block , [ "else" , block ] ;
+while_stmt  = "while" , "(" , condition , ")" , block ;
+print_stmt  = "print" , expression , ";" ;
+return_stmt = "return" , [ expression ] , ";" ;
+condition   = expression , relop , expression ;
+relop       = "==" | "!=" | "<" | "<=" | ">" | ">=" ;
+expression  = term , { ( "+" | "-" ) , term } ;
+term        = factor , { ( "*" | "/" ) , factor } ;
+factor      = number | ident , [ "(" , [ args ] , ")" ] | "(" , expression , ")" | "-" , factor ;
+args        = expression , { "," , expression } ;
+number      = digit , { digit } , [ "." , digit , { digit } ] ;
+ident       = ( letter , { letter | digit | "_" } ) - keyword ;
+keyword     = "fun" | "var" | "if" | "else" | "while" | "print" | "return" ;
+letter      = ? A–Z, a–z ? ;
+digit       = ? 0–9 ? ;`,
+      tests: [{ name: "print(1+2)*3;", s: "print(1+2)*3;" }, { name: "x=-(-2.5);", s: "x=-(-2.5);" }, { name: "if(a<=b){f(a,b);}", s: "if(a<=b){f(a,b);}" },
+        { name: "if(a<b)print(a);", s: "if(a<b)print(a);" }, { name: "print(1.);", s: "print(1.);" }] },
   ];
-  let rules = null, cur = PRE[1];
-  presetRow("eb-presets", PRE, p => { cur = p; $("eb-in").value = p.text; rebuild(p.start); $("eb-word").value = p.tests[0].s; testRow(); check(); });
+  let rules = null, cur = PRE[1], level = "znaki";
+  const LEVEL_HINT = {
+    znaki: "Każdy napis w cudzysłowie jest rozkładany na znaki, np. \"<=\" zaczyna się od <. Tak działa analizator bez osobnego leksera.",
+    symbole: "Każdy napis w cudzysłowie (np. \"<=\", \"while\") to jeden symbol — jak po analizie leksykalnej. Konflikty między < a <= albo słowem kluczowym a identyfikatorem rozstrzyga lekser, więc tu znikają.",
+  };
+  function setLevel(l) {
+    level = l;
+    $("eb-level").querySelectorAll("button").forEach(x => x.setAttribute("aria-pressed", x.dataset.level === l ? "true" : "false"));
+    $("eb-level-hint").textContent = LEVEL_HINT[l];
+  }
+  $("eb-level").querySelectorAll("button").forEach(b => b.addEventListener("click", () => { setLevel(b.dataset.level); rebuild(); }));
+  setLevel(level);
+  presetRow("eb-presets", PRE, p => { cur = p; setLevel(p.level || "znaki"); $("eb-in").value = p.text; rebuild(p.start); $("eb-word").value = p.tests[0].s; testRow(); check(); });
   $("eb-presets").querySelectorAll("button")[1].setAttribute("aria-pressed", "true");
 
   function testRow() {
@@ -3238,17 +3329,17 @@ cyfra     = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" ;`,
     }
     const prev = start || $("eb-start").value;
     $("eb-start").innerHTML = rules.map(r => `<option${r.name === prev ? " selected" : ""}>${esc(r.name)}</option>`).join("");
-    const an = analyzeEBNF(rules, { charLevel: true });
+    const an = analyzeEBNF(rules, { charLevel: level === "znaki" });
     const conf = new Set(an.conflicts.map(c => c.uid));
-    $("eb-diagrams").innerHTML = rules.map(r => `<figure><figcaption>${esc(r.name)} <span class="fs">pierw ${setHTML(an.firstR.get(r.name))} · nast ${setHTML(an.followR.get(r.name))}</span></figcaption><div class="sv">${RR.diagram(r.body, { conflicts: conf })}</div></figure>`).join("")
+    $("eb-diagrams").innerHTML = rules.map(r => `<figure><figcaption>${esc(r.name)} <span class="fs">pierw ${setHTML(an.firstR.get(r.name))} · nast ${setHTML(an.followR.get(r.name))}</span></figcaption><div class="sv">${RR.diagram(r.body, { conflicts: conf, name: r.name })}</div></figure>`).join("")
       || '<p class="hint">Brak reguł.</p>';
     let h = "";
-    if (!an.conflicts.length) h = msg("ok", "<b>Diagram deterministyczny.</b> W każdym rozgałęzieniu i każdej pętli wystarczy jeden znak wejścia, żeby wybrać drogę.");
+    if (!an.conflicts.length) h = msg("ok", `<b>Diagram deterministyczny.</b> W każdym rozgałęzieniu i każdej pętli wystarczy jeden ${level === "znaki" ? "znak" : "symbol"} wejścia, żeby wybrać drogę.`);
     else {
       const seen = new Set();
       h = msg("err", `<b>Diagram nie jest deterministyczny.</b> Rozgałęzienia z konfliktem są zaznaczone na czerwono:<ul>${an.conflicts.filter(c => { const k = c.uid + c.msg + c.syms; if (seen.has(k)) return false; seen.add(k); return true; }).map(c => `<li><span class="nt">${esc(c.rule)}</span>: ${esc(c.msg)}${c.syms.length ? ` — ${setHTML(c.syms)}` : ""} (reguła ${c.kind})</li>`).join("")}</ul>`);
       const multi = []; rules.forEach(r => walkEBNF(r.body, n => { if (n.type === "term" && [...n.text].length > 1) multi.push(n.text); }));
-      if (multi.length) h += msg("info", "Analiza dotyczy pojedynczych znaków. Konflikt między słowem kluczowym a identyfikatorem (np. <span class=\"t\">END.</span> i litera) rozwiązuje zwykle lekser, który najpierw składa znaki w słowa.");
+      if (multi.length && level === "znaki") h += msg("info", "Analiza dotyczy pojedynczych znaków. Konflikt między napisami o wspólnym początku (np. <span class=\"t\">&lt;</span> i <span class=\"t\">&lt;=</span>) albo między słowem kluczowym a identyfikatorem rozwiązuje zwykle lekser, który najpierw składa znaki w symbole. Przełącz analizę na „symbole leksykalne”, żeby zobaczyć, czy gramatyka jest LL(1) na poziomie symboli.");
     }
     if (an.leftRec.length) h += msg("warn", `<b>Rekursja lewostronna:</b> ${an.leftRec.map(n => `<span class="nt">${esc(n)}</span>`).join(", ")}.`);
     $("eb-ll1").innerHTML = h;
@@ -3332,7 +3423,7 @@ cyfra     = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" ;`,
     { q: "Który etap wykryje błąd w <code>x := 3 + * 4</code>?", o: ["analiza leksykalna", "analiza składniowa", "analiza semantyczna", "wykonanie programu"], a: 1, e: "Wszystkie tokeny są poprawne, ale ich kolejność łamie gramatykę: po + musi wystąpić czynnik." },
     { q: "W języku statycznie typowanym: <code>int x = \"abc\";</code>. Kto zgłosi błąd?", o: ["lekser", "parser", "analiza semantyczna", "nikt — błąd ujawni się w czasie wykonania"], a: 2, e: "Składniowo to zwykłe przypisanie. Niezgodność typów to zależność kontekstowa, sprawdzana w analizie semantycznej." },
     { q: "Jak działa CPython?", o: ["jest czystym interpreterem tekstu źródłowego", "kompiluje do kodu maszynowego jak kompilator C", "kompiluje do kodu bajtowego i interpretuje go w maszynie wirtualnej", "tłumaczy Pythona na Javę"], a: 2, e: "„Kompilowany” i „interpretowany” to cechy implementacji. CPython łączy oba podejścia." },
-    { q: "Do której najwęższej klasy należy produkcja <code>A ::= aB | b</code>?", o: ["regularne (typ 3)", "bezkontekstowe (typ 2)", "kontekstowe (typ 1)", "bez ograniczeń (typ 0)"], a: 0, e: "Postać A ::= aB | a to gramatyka prawostronnie liniowa, czyli regularna. Należy też do szerszych klas, ale pytamy o najwęższą." },
+    { q: "Do której najwęższej klasy należy produkcja <code>A ::= aB | b</code>?", o: ["regularne (typ 3)", "bezkontekstowe (typ 2)", "kontekstowe (typ 1)", "bez ograniczeń (typ 0)"], a: 0, e: "Każda alternatywa to symbol końcowy, po którym stoi co najwyżej jeden symbol pomocniczy (aB albo b) — to gramatyka prawostronnie liniowa, czyli regularna. Należy też do szerszych klas, ale pytamy o najwęższą." },
     { q: "Produkcja <code>aAb ::= aCb</code> jest:", o: ["regularna", "bezkontekstowa", "kontekstowa", "niepoprawna"], a: 2, e: "A można zastąpić przez C tylko w otoczeniu a…b — to produkcja kontekstowa postaci αAβ ::= αξβ z ξ ≠ ε." },
     { q: "Czego nie ma w AST, a jest w drzewie wyprowadzenia wyrażenia <code>(2 + 3) * 4</code>?", o: ["liczb 2, 3, 4", "operatorów + i *", "nawiasów i łańcuchów W → S → C", "żadnej różnicy — to te same drzewa"], a: 2, e: "Strukturę wyrażają kształt AST i kolejność dzieci; nawiasy i produkcje łańcuchowe są zbędne." },
     { q: "Dla <code>A ::= Bc</code>, <code>B ::= b | ε</code>: pierw(A) = ?", o: ["{ b }", "{ c }", "{ b, c }", "{ b, ε }"], a: 2, e: "B może zniknąć, więc pierwszym symbolem może być też c. To przypadek, którego nie wolno pominąć przy liczeniu pierw." },
@@ -3381,7 +3472,7 @@ showTab((location.hash || "").slice(1) || store.get("lab-tab") || "drzewa");
 if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => {
   ["__updateEx", "__updateDv", "__updateFs", "__updatePr", "__updateEb", "__updateAs"].forEach(f => window[f] && window[f]());
 });
-// ===== Zakładki do wykładu 2 =====
+// ===== Zakładki do wykładu 9 =====
 
 function colorize(text, lang) {
   const kw = lang === "pascal"
@@ -3456,13 +3547,13 @@ const EX2 = {
     const irs = new Map(rules.map(r => [r.name, genIR(r.body, A)]));
     st = { rules, A, irs, conf: new Set(A.conflicts.map(c => c.uid)) };
     let h = "";
-    if (inlined.length) h += msg("info", `<b>B1:</b> podstawiono ${inlined.map(n => `<span class="nt">${esc(n)}</span>`).join(", ")} — zostało ${rules.length} ${rules.length === 1 ? "diagram" : "diagramy"}.`);
+    if (inlined.length) h += msg("info", `<b>B1:</b> podstawiono ${inlined.map(n => `<span class="nt">${esc(n)}</span>`).join(", ")} — ${odmien(rules.length, "został", "zostały", "zostało").replace(/^(\d+) (\S+)$/, "$2 $1")} ${odmien(rules.length, "diagram", "diagramy", "diagramów").replace(/^\d+ /, "")}.`);
     if (A.undefinedNT.length) h += msg("err", `Brak reguł dla: ${A.undefinedNT.map(esc).join(", ")}.`);
     if (A.conflicts.length) h += msg("err", `<b>Diagram nie jest deterministyczny</b> — wygenerowany program będzie wybierał gałąź błędnie:<ul>${A.conflicts.map(c => `<li><span class="nt">${esc(c.rule)}</span>: ${esc(c.msg)}${c.syms.length ? ` — ${setHTML(c.syms)}` : ""}</li>`).join("")}</ul>`);
     if (A.leftRec.length) h += msg("warn", `<b>Rekursja lewostronna</b> (${A.leftRec.map(esc).join(", ")}): procedura wywoła samą siebie, nie czytając wejścia, i program się zapętli.`);
     if (!A.conflicts.length && !A.leftRec.length && !A.undefinedNT.length) h += msg("ok", "Diagram jest deterministyczny — program działa bez powrotów.");
     $("bp-msg").innerHTML = h;
-    $("bp-diagrams").innerHTML = rules.map(r => `<figure data-rule="${esc(r.name)}"><figcaption>${esc(r.name)}</figcaption><div class="sv">${RR.diagram(r.body, { conflicts: st.conf })}</div></figure>`).join("");
+    $("bp-diagrams").innerHTML = rules.map(r => `<figure data-rule="${esc(r.name)}"><figcaption>${esc(r.name)}</figcaption><div class="sv">${RR.diagram(r.body, { conflicts: st.conf, name: r.name })}</div></figure>`).join("");
     renderCode();
     renderRun();
   }
@@ -3604,7 +3695,11 @@ const EX2 = {
           ${n.nast ? `<circle cx="${x + W * 0.75}" cy="${y + H1 + H2 / 2}" r="3"/>` : `<text class="nil" x="${x + W * 0.75}" y="${y + H1 + H2 / 2}" text-anchor="middle" dominant-baseline="central">nil</text>`}
         </g>`);
       });
-      return `<figure><div class="sv"><svg width="${w}" height="${hh}" viewBox="0 0 ${w} ${hh}"><defs><marker id="cs-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="arrowhead"/></marker></defs>${o.join("")}</svg></div></figure>`;
+      const idx = new Map([...L.pos.keys()].map((n, i) => [n, i + 1]));
+      const ref = t => t ? (idx.has(t) ? `węzeł ${idx.get(t)}` : "węzeł innego symbolu") : "nil";
+      const desc = `struktura danych symbolu ${h.name}, wejście: węzeł ${idx.get(h.entry)}. ` + [...L.pos.keys()].map(n =>
+        `Węzeł ${idx.get(n)}: ${n.empty ? "pusty" : n.sym}, nast: ${ref(n.nast)}, człalt: ${ref(n.alt)}`).join("; ") + ".";
+      return `<figure><div class="sv"><svg width="${w}" height="${hh}" viewBox="0 0 ${w} ${hh}" role="img" aria-label="${esc(desc)}"><defs><marker id="cs-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="arrowhead"/></marker></defs>${o.join("")}</svg></div></figure>`;
     }).join("");
   }
   function rebuild() {
@@ -3667,7 +3762,7 @@ const EX2 = {
 })();
 
 if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { ["__updateBp", "__updateCs"].forEach(f => window[f] && window[f]()); });
-// ===== Zakładka do wykładu 3: translator RBNF =====
+// ===== Zakładka do wykładu 10: translator RBNF =====
 
 function structFromSnapshot(snap, opts = {}) {
   const byId = new Map(snap.nodes.map(n => [n.id, { ...n }]));
@@ -3739,7 +3834,10 @@ function structFromSnapshot(snap, opts = {}) {
         ${cell(n.alt, x + W * 0.25)}${cell(n.nast, x + W * 0.75)}
       </g>`);
     });
-    return `<figure>${title ? `<figcaption>${title}</figcaption>` : ""}${note ? `<p class="hint">${note}</p>` : ""}<div class="sv"><svg width="${w}" height="${hh}" viewBox="0 0 ${w} ${hh}"><defs><marker id="tr-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="arrowhead"/></marker></defs>${o.join("")}</svg></div></figure>`;
+    const cellTxt = (v, obj) => v === undefined ? "nieustawione" : v === null ? "nil" : obj ? `węzeł ${obj.num}` : "ustawione";
+    const desc = `${headLabel !== null ? `struktura symbolu ${headLabel}. ` : "budowana struktura. "}` + [...L.pos.keys()].map(n =>
+      `Węzeł ${n.num}: ${n.sym === "?" ? "jeszcze nieustawiony" : n.empty ? "pusty" : n.sym}, nast: ${cellTxt(n.nast, n.nastObj)}, człalt: ${cellTxt(n.alt, n.altObj)}`).join("; ") + ".";
+    return `<figure>${title ? `<figcaption>${title}</figcaption>` : ""}${note ? `<p class="hint">${note}</p>` : ""}<div class="sv"><svg width="${w}" height="${hh}" viewBox="0 0 ${w} ${hh}" role="img" aria-label="${esc(desc)}"><defs><marker id="tr-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="arrowhead"/></marker></defs>${o.join("")}</svg></div></figure>`;
   }
   const parts = [];
   snap.heads.filter(h => !h.sentinel && h.sym !== undefined).forEach(h => {
@@ -3858,7 +3956,7 @@ function structFromSnapshot(snap, opts = {}) {
   window.__updateTr = render;
   render();
 })();
-// ===== Zakładki do wykładu 4: kompilator PL/0, generowanie kodu, maszyna, reagowanie na błędy =====
+// ===== Zakładki do wykładu 11: kompilator PL/0, generowanie kodu, maszyna, reagowanie na błędy =====
 
 const PL0_PRZYKLADY = [
   { name: "mnożenie", src: `const m = 7, n = 85;
@@ -4060,7 +4158,7 @@ function pl0Wydruk(w) {
 
   pl0Stan.sluchacze.push(w => {
     $("pl-out").innerHTML = pl0Wydruk(w) + (w.ok ? "\n\n" + esc(PL0.listingTekst(w.kod)) : "");
-    if (w.ok) $("pl-status").innerHTML = msg("ok", `<b>Bez błędów.</b> ${w.kod.length} rozkazów, ${w.tokeny.length} symboli.`);
+    if (w.ok) $("pl-status").innerHTML = msg("ok", `<b>Bez błędów.</b> ${odmien(w.kod.length, "rozkaz", "rozkazy", "rozkazów")}, ${odmien(w.tokeny.length, "symbol", "symbole", "symboli")}.`);
     else if (w.niedokonczony && !w.bledy.length) $("pl-status").innerHTML = msg("err", "<b>Program niedokończony</b> — tekst skończył się przed końcową kropką.");
     else $("pl-status").innerHTML = msg("err", `<b>Błędów: ${w.bledy.length}.</b> ${w.niedokonczony ? "Program niedokończony. " : ""}Przyczyny i pominięte symbole pokazuje zakładka 13.`);
 
@@ -4133,7 +4231,7 @@ function pl0Wydruk(w) {
 
     $("kg-slider").max = ks.length; $("kg-slider").value = krok;
     if (pelny) {
-      $("kg-text").innerHTML = w.ok ? `Cały kod: <b>${w.kod.length}</b> rozkazów. Kliknij symbol albo rozkaz.` : msg("warn", "Program ma błędy — kod jest niepełny. Popraw program w zakładce 10.");
+      $("kg-text").innerHTML = w.ok ? `Cały kod: ${odmienHTML(w.kod.length, "rozkaz", "rozkazy", "rozkazów")}. Kliknij symbol albo rozkaz.` : msg("warn", "Program ma błędy — kod jest niepełny. Popraw program w zakładce 10.");
     } else if (!ostatni) {
       $("kg-text").innerHTML = "Początek kompilacji: tablica kodu jest pusta. Przesuń suwak albo naciśnij ▶.";
     } else {
