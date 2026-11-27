@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Laboratorium gramatyk</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231f4e79'/%3E%3Ctext x='16' y='21.5' font-family='monospace' font-size='14' font-weight='700' fill='%23fff' text-anchor='middle'%3E::=%3C/text%3E%3C/svg%3E">
 <meta name="description" content="Interaktywne ćwiczenia do wykładów 8–11 z Języków programowania: gramatyki, pierw i nast, LL(1), EBNF, diagramy składni, translator RBNF i kompilator PL/0 Wirtha.">
 <style>body{margin:0}img{max-width:100%}</style>
 <style>
@@ -57,7 +58,8 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .brand h1 { font-size: 1.55rem; font-weight: 700; letter-spacing: -0.01em; color: var(--accent); }
 .brand h1 .prod { font-family: var(--font-code); font-weight: 500; color: var(--muted); font-size: 0.8em; margin-inline: 2px; }
 .brand p { margin: 0; color: var(--muted); font-size: 0.92rem; }
-.tabs { display: flex; gap: 2px; overflow-x: auto; scrollbar-width: thin; }
+.brand .theme-btn { margin-left: auto; font-size: 0.82rem; padding: 3px 10px; color: var(--muted); }
+.tabs { display: flex; gap: 2px; overflow-x: auto; scrollbar-width: thin; position: relative; }
 .tabs button {
   border: 0; background: none; padding: 10px 14px 11px; cursor: pointer; white-space: nowrap;
   color: var(--muted); border-bottom: 3px solid transparent; font-weight: 500;
@@ -65,6 +67,10 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .tabs button .n { font-family: var(--font-code); font-size: 0.8em; margin-right: 6px; color: var(--muted); }
 .tabs button[aria-selected="true"] { color: var(--accent); border-bottom-color: var(--accent); }
 .tabs button:hover { color: var(--fg); }
+/* Gdy kart nie widać w całości (wąski ekran), krawędź z ukrytymi kartami zanika */
+.tabs.more-right { mask-image: linear-gradient(to right, #000 calc(100% - 48px), transparent); }
+.tabs.more-left { mask-image: linear-gradient(to left, #000 calc(100% - 48px), transparent); }
+.tabs.more-left.more-right { mask-image: linear-gradient(to right, transparent, #000 48px, #000 calc(100% - 48px), transparent); }
 
 main { padding-block: 22px 40px; }
 .foot { border-top: 1px solid var(--line); background: var(--surface); color: var(--muted); font-size: 0.85rem; padding-block: 14px 22px; }
@@ -375,6 +381,7 @@ table.data tr.cur td { background: var(--warn-soft); }
     <div class="brand">
       <h1>Laboratorium gramatyk</h1>
       <p>Języki programowania · wykłady 8–11 · gramatyki, diagramy składni, analizatory, translator RBNF i kompilator PL/0</p>
+      <button class="btn theme-btn" id="theme-btn" type="button">Motyw: automatyczny</button>
     </div>
     <nav class="tabs" role="tablist" aria-label="Pracownie">
       <button role="tab" id="tab-drzewa" data-tab="drzewa"><span class="n">1</span>Od tekstu do drzewa</button>
@@ -603,7 +610,7 @@ table.data tr.cur td { background: var(--warn-soft); }
   <div class="lead">
     <h2>Od diagramu do programu</h2>
     <span class="ref">wykład 9, reguły B1–B7</span>
-    <p>Każdy diagram staje się procedurą: owal — sprawdzeniem symbolu i <code>pobsym</code>, prostokąt — wywołaniem, rozgałęzienie — instrukcją <code>if</code>, pętla — <code>while</code>. Kliknij element diagramu albo wiersz programu, żeby zobaczyć, co sobie odpowiada.</p>
+    <p>Każdy diagram staje się procedurą: owal — sprawdzeniem symbolu i <code>pobsym</code>, prostokąt — wywołaniem, rozgałęzienie — instrukcją <code>if</code>, pętla — <code>while</code>. Kliknij element diagramu albo wiersz programu, żeby zobaczyć, co sobie odpowiada. Na wykładzie 9 symbolami są pojedyncze znaki, więc reguła B7 ma postać <code>if ch = 'x' then read(ch)</code>; tu symbolami mogą być całe słowa, dlatego <code>ch</code> zastępuje <code>sym</code>, a <code>read(ch)</code> — <code>pobsym</code>.</p>
   </div>
   <div class="cols">
     <div class="stack">
@@ -744,7 +751,7 @@ table.data tr.cur td { background: var(--warn-soft); }
   <div class="lead">
     <h2>Struktura a znaczenie: łączność</h2>
     <span class="ref">wykład 8, część 7</span>
-    <p>Trzy opisy tego samego języka różnic, np. <code>10 - 5 - 2</code>. Zbiór zdań jest ten sam, ale struktura — a więc i wynik — już nie.</p>
+    <p>Trzy opisy tego samego języka: różnic kilku liczb, np. <code>10 - 5 - 2</code>. Zbiór zdań jest ten sam, ale struktura — a więc i wynik — już nie.</p>
   </div>
   <div class="card stack">
     <div>
@@ -936,7 +943,7 @@ table.data tr.cur td { background: var(--warn-soft); }
       <a href="https://people.inf.ethz.ch/wirth/CompilerConstruction/index.html">N. Wirth, <i>Compiler Construction</i></a> ·
       <a href="https://craftinginterpreters.com/">R. Nystrom, <i>Crafting Interpreters</i></a> ·
       <a href="https://github.com/p4welrog/jpi">kod źródłowy tej strony</a></p>
-    <p>Wybrana zakładka, programy PL/0 i odpowiedzi w quizie zapisują się tylko w tej przeglądarce (localStorage). Wersja z 27.11.2026.</p>
+    <p>Wybrana zakładka, motyw, programy PL/0 i odpowiedzi w quizie zapisują się tylko w tej przeglądarce (localStorage). Wersja z 27.11.2026.</p>
   </div>
 </footer>
 <script>
@@ -2700,6 +2707,21 @@ const store = {
   set(k, v) { try { localStorage.setItem(k, v); } catch (e) { /* brak dostępu */ } },
 };
 
+// Motyw: automatyczny (wg systemu) → jasny → ciemny
+(function () {
+  const KOLEJ = ["auto", "light", "dark"], NAZWA = { auto: "automatyczny", light: "jasny", dark: "ciemny" };
+  const btn = document.getElementById("theme-btn");
+  function ustaw(t) {
+    if (t === "auto") delete document.documentElement.dataset.theme; else document.documentElement.dataset.theme = t;
+    btn.textContent = "Motyw: " + NAZWA[t];
+    btn.title = "Zmień motyw (automatyczny, jasny, ciemny)";
+    store.set("lab-theme", t);
+  }
+  let t = store.get("lab-theme"); if (!KOLEJ.includes(t)) t = "auto";
+  ustaw(t);
+  btn.addEventListener("click", () => { t = KOLEJ[(KOLEJ.indexOf(t) + 1) % KOLEJ.length]; ustaw(t); });
+})();
+
 // Teksty w drzewach i diagramach są pisane fontem o stałej szerokości (IBM Plex Mono: 0,6 em na znak).
 // Mierzymy je arytmetycznie, z zapasem na fonty zastępcze — wynik nie zależy od tego, czy font już się wczytał.
 function measure(text, px) { return [...String(text)].length * px * 0.64; }
@@ -2795,7 +2817,18 @@ function showTab(id) {
   });
   try { history.replaceState(null, "", "#" + id); } catch (e) { /* ignoruj */ }
   store.set("lab-tab", id);
+  const tb = $("tab-" + id), bar = tb.parentElement;
+  if (tb.offsetLeft < bar.scrollLeft || tb.offsetLeft + tb.offsetWidth > bar.scrollLeft + bar.clientWidth)
+    bar.scrollLeft = tb.offsetLeft - (bar.clientWidth - tb.offsetWidth) / 2;
+  kartyKrawedzie();
 }
+function kartyKrawedzie() {
+  const bar = document.querySelector(".tabs");
+  bar.classList.toggle("more-left", bar.scrollLeft > 2);
+  bar.classList.toggle("more-right", bar.scrollLeft + bar.clientWidth < bar.scrollWidth - 2);
+}
+document.querySelector(".tabs").addEventListener("scroll", kartyKrawedzie, { passive: true });
+window.addEventListener("resize", kartyKrawedzie);
 document.querySelectorAll(".tabs button").forEach(b => {
   b.setAttribute("aria-controls", "p-" + b.dataset.tab);
   $("p-" + b.dataset.tab).tabIndex = 0;
@@ -3104,7 +3137,11 @@ let openInParser = null;
     }
     const sp = joinable(g) ? " " : "";
     const rows = res.rows.slice(0, shown);
-    $("pr-trace").innerHTML = `<table class="data"><thead><tr><th>#</th><th>Cele</th><th>Wejście</th><th>Akcja</th></tr></thead><tbody>${rows.map((r, i) => {
+    // Długi ślad (np. zapętlenie na rekursji lewostronnej) — w tabeli tylko ostatnie wiersze, żeby strona nie zwalniała
+    const MAXW = 300, od = Math.max(0, shown - MAXW);
+    const cut = od ? `<p class="hint" style="margin-bottom:6px">Pokazano ostatnie ${MAXW} z ${shown} kroków.</p>` : "";
+    $("pr-trace").innerHTML = `${cut}<table class="data"><thead><tr><th>#</th><th>Cele</th><th>Wejście</th><th>Akcja</th></tr></thead><tbody>${rows.slice(od).map((r, k) => {
+      const i = od + k;
       const inp = r.input.length ? r.input.map((t, j) => j === 0 && r.la ? `<span class="la">${esc(t)}</span>` : esc(t)).join(sp) : '<span class="eps">—</span>';
       return `<tr class="k-${r.kind}${i === shown - 1 ? " cur" : ""}"><td class="code">${i + 1}</td><td class="code">${r.goals.length ? seqHTML(g, r.goals) : '<span class="eps">—</span>'}</td><td class="code">${inp}</td><td class="act">${esc(r.action)}</td></tr>`;
     }).join("")}</tbody></table>`;
@@ -4107,6 +4144,12 @@ function pl0Ustaw(src, zrodlo) {
   if (zrodlo !== "edytor" && $("pl-in").value !== src) $("pl-in").value = src;
   pl0Stan.w = PL0.kompiluj(src);
   pl0Stan.sluchacze.forEach(f => f(pl0Stan.w));
+  pl0Chipy();
+}
+// Wyróżnienie przykładu we wszystkich trzech zakładkach: tylko gdy program jest dokładnie tym przykładem
+function pl0Chipy() {
+  ["pl-presets", "kg-presets", "ms-presets"].forEach(id => $(id).querySelectorAll("button").forEach(b =>
+    b.setAttribute("aria-pressed", PL0_PRZYKLADY[+b.dataset.i].src === pl0Stan.src ? "true" : "false")));
 }
 
 function pl0Komentarz(r) {
@@ -4385,6 +4428,7 @@ function pl0Wydruk(w) {
   function update() {
     const src = $("er-in").value;
     store.set("lab-pl0-err", src);
+    $("er-presets").querySelectorAll("button").forEach(b => b.setAttribute("aria-pressed", PL0_BLEDNE[+b.dataset.i].src === src ? "true" : "false"));
     w = PL0.kompiluj(src, { identOdgradza: $("er-ident").checked });
     rysuj();
   }
